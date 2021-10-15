@@ -19,6 +19,7 @@ public class MessengerFacade implements AddMessage {
         Message inMessage = new Message();
         inMessage.setMessageText(addMessageCommand.getMessage());
         log.info("Message to be inserted: " + inMessage);
-        messageDatabase.save(inMessage);
+        Long insertedId = messageDatabase.save(inMessage);
+        log.info("ID of log message inserted: " + insertedId);
     }
 }

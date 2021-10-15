@@ -13,8 +13,8 @@ public class MessageDatabaseAdapter implements MessageDatabase {
     }
 
     @Override
-    public void save(Message message) {
-        messageRepository.save(message);
+    public Long save(Message message) {
+        return messageRepository.save(message).getIdAsLong();
 
     }
 }
