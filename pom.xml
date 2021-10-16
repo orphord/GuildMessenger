@@ -15,6 +15,7 @@
 	<description>Simple Messenger for Guild Education tech demo</description>
 	<properties>
 		<java.version>11</java.version>
+		<springdoc.api.ui.version>1.5.11</springdoc.api.ui.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -46,6 +47,11 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
     </dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc.api.ui.version}</version>
+		</dependency>
   </dependencies>
 
 	<build>
