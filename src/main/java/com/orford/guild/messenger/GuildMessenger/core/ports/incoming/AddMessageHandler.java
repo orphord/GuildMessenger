@@ -3,7 +3,7 @@ package com.orford.guild.messenger.GuildMessenger.core.ports.incoming;
 
 import com.orford.guild.messenger.GuildMessenger.core.model.AddMessageCommand;
 
-public interface AddMessage {
+public interface AddMessageHandler {
     void handle(AddMessageCommand addMessageCommand);
 
 }
