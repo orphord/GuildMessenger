@@ -6,4 +6,6 @@ import lombok.*;
 @Data
 public class AddMessageCommand {
     private String message;
+    private String senderId;
+    private String receiverId;
 }

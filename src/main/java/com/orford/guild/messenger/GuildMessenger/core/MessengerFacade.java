@@ -16,10 +16,18 @@ public class MessengerFacade implements AddMessage {
     @Override
     public void handle(AddMessageCommand addMessageCommand) {
         log.info("Message received in MessengerFacade.handle: " + addMessageCommand.toString());
-        Message inMessage = new Message();
-        inMessage.setMessageText(addMessageCommand.getMessage());
+        Message inMessage = messageFromAddMessageCommand(addMessageCommand);
         log.info("Message to be inserted: " + inMessage);
         Long insertedId = messageDatabase.save(inMessage);
         log.info("ID of log message inserted: " + insertedId);
+    }
+
+    private Message messageFromAddMessageCommand(AddMessageCommand addMessageCommand) {
+        Message inMessage = new Message();
+        inMessage.setMessageText(addMessageCommand.getMessage());
+        inMessage.setSenderId(addMessageCommand.getSenderId());
+        inMessage.setReceiverId(addMessageCommand.getReceiverId());
+
+        return inMessage;
     }
 }

@@ -19,6 +19,12 @@ public class Message {
     @EqualsAndHashCode.Exclude
     private Long id;
 
+    @Column(name="sender_id")
+    private String senderId;
+
+    @Column(name="receiver_id")
+    private String receiverId;
+
     @Column(name="message_text")
     private String messageText;
 
