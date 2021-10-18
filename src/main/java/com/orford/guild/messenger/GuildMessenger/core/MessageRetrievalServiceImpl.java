@@ -17,6 +17,8 @@ public class MessageRetrievalServiceImpl implements MessageRetrievalService {
     @Override
     public MessageListResponse getMessages(String senderId) {
         List<Message> messageList = messageDatabase.getMessages();
-        return null;
+        MessageListResponse outMessageList = MessageListResponse.fromMessageList(messageList);
+
+        return outMessageList;
     }
 }

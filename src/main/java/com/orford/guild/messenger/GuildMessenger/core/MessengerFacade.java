@@ -16,7 +16,7 @@ public class MessengerFacade implements AddMessageHandler {
     private final MessageSender messageSender;
 
     @Override
-    public void handle(AddMessageCommand addMessageCommand) {
+    public boolean handle(AddMessageCommand addMessageCommand) {
         log.info("Message received in MessengerFacade.handle: " + addMessageCommand.toString());
         Message inMessage = messageFromAddMessageCommand(addMessageCommand);
         log.info("Message to be inserted: " + inMessage);
@@ -29,6 +29,8 @@ public class MessengerFacade implements AddMessageHandler {
 
         log.info("ID of log message inserted: {}", insertedId);
         log.info("Message {} sent successfully: {}", insertedId, messageSentSuccessfully);
+
+        return messageSentSuccessfully && insertedId != null;
     }
 
     private Message messageFromAddMessageCommand(AddMessageCommand addMessageCommand) {
