@@ -53,5 +53,4 @@ The SOLID principles are nicely implemented by this pattern as well.
 The core domain has the interfaces that are central to the operation of the system ("Ports") and the implementation of these ("Adapters").  The idea of this is to neatly separate concerns and encapsulate the core functionality of the system.
 
 ##### Output
-As mentioned above the two outputs are a text file and an in-memory database.  The text file is a representation of what _would_ be sent to a receiving user.
-
+As mentioned above the two outputs are a text file and an in-memory database.  The text file is a representation of what _would_ be sent to a receiving user.  The message will _only_ appear in the text file after the process has _stopped_.
