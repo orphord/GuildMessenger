@@ -21,7 +21,8 @@ class MessengerFacadeTest {
     @Autowired
     MessageRetrievalService retrievalService;
 
-    private AddMessageCommand messageCommand;
+    private static AddMessageCommand messageCommand;
+    private static int numInserted = 0;
 
     @BeforeEach
     void setup() {
@@ -30,6 +31,11 @@ class MessengerFacadeTest {
         messageCommand.setSenderId("orphord");
         messageCommand.setReceiverId("bplantico");
         messageCommand.setMessage("Well hello there");
+        addMessageHandler.handle(messageCommand);
+        numInserted++;
+        messageCommand.setMessage("Well hello again");
+        addMessageHandler.handle(messageCommand);
+        numInserted++;
 
     }
 
@@ -37,18 +43,29 @@ class MessengerFacadeTest {
     void testIncomingMessageHandle() {
         log.info("testIncomingMessageHandle called.");
         boolean success = addMessageHandler.handle(messageCommand);
+        numInserted++;
         Assertions.assertTrue(success, "Should have been successful.");
     }
 
     @Test
     void testGetAllMessages() {
         log.info("Test get all messages.");
-        addMessageHandler.handle(messageCommand);
-        addMessageHandler.handle(messageCommand);
-
         MessageListResponse listResponse = retrievalService.getMessages(null);
-        log.info("Number of messages returned: {}", listResponse.getMessageResponses().size());
-//TODO: Might be 2 or 3 depending on which test runs first. :-/
-        Assertions.assertEquals(2, listResponse.getMessageResponses().size(), "Should have been two messages returned.");
+        log.info("-- Number of messages returned: {}", listResponse.getMessageResponses().size());
+
+        Assertions.assertEquals(numInserted, listResponse.getMessageResponses().size(), "Should have been " + numInserted + " messages returned.");
+    }
+
+    @Test
+    void testGetMessagesBySenderId () {
+        log.info("Test get messages by sender ID.");
+        messageCommand.setSenderId("lester");
+        boolean success = addMessageHandler.handle(messageCommand);
+        numInserted++;
+        MessageListResponse listResponse = retrievalService.getMessages("orphord");
+        log.info("++ Number of messages returned: {}", listResponse.getMessageResponses().size());
+
+        Assertions.assertEquals(numInserted -1 , listResponse.getMessageResponses().size(), "All messages but 1 added by orphord should have been" + numInserted + " messages returned.");
+
     }
 }

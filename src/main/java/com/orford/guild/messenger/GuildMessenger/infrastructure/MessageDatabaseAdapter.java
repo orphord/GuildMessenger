@@ -25,14 +25,16 @@ public class MessageDatabaseAdapter implements MessageDatabase {
     }
 
     @Override
-    public List<Message> getMessagesBySenderId(String senderId) {
-        Instant limitDaysFromNow = Instant.now().plus(30, ChronoUnit.DAYS);;
+    public List<Message> getMessagesBySenderId(String senderId, Integer daysBack) {
+        daysBack = daysBack == null ? 30 : daysBack;
+        Instant limitDaysFromNow = Instant.now().plus(daysBack, ChronoUnit.DAYS);;
         return messageRepository.findMessageBySenderIdAndCreateTimeBefore(senderId,Timestamp.from(limitDaysFromNow));
     }
 
     @Override
-    public List<Message> getMessages() {
-        Instant limitDaysFromNow = Instant.now().plus(30, ChronoUnit.DAYS);;
+    public List<Message> getMessages(Integer daysBack) {
+        daysBack = daysBack == null ? 30 : daysBack;
+        Instant limitDaysFromNow = Instant.now().plus(daysBack, ChronoUnit.DAYS);;
         return messageRepository.findMessageByCreateTimeBefore(Timestamp.from(limitDaysFromNow));
     }
 

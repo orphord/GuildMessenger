@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface MessageDatabase {
     Long save(Message message);
-    List<Message> getMessagesBySenderId(String senderId);
-    List<Message> getMessages();
+    List<Message> getMessagesBySenderId(String senderId, Integer daysBack);
+    List<Message> getMessages(Integer daysBack);
 }
