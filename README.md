@@ -12,10 +12,22 @@ In developing this demo app I decided to use a "Ports and Adapters" pattern.  Th
 1. In root directory of application, type `mvn spring-boot:run`
 2. It should be running after a few seconds
 3. In `Postman` (or some application that can send `POST` requests) create a `POST` request in the following manner:
-   * In the request body put `{"message":"some message text here"}`
-   * The URL should be `localhost:8080/<somethingsomething>`
+   * In the request body put
+   ```
+     {
+	"message":"some message text here",
+	"senderId":"someId",
+	"receiverId":"someOtherId"
+     }
+   ```
+   * The URL should be `localhost:8080/addMessage`
    * The media type should be `application/json`
 4. Send.
+5. The database can be accessed while the system is running
+   * Goto [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
+   * Change the `JDBC URL` field to "jdbc:h2:mem:testdb" (with no quotes).
+   * Use password `password`
+   * Once the `h2` UI comes up, click the `Messages` element on the left and the `Run` button should return the messages stored in the database.
 
 ### Where is the API documentation?
 * API documentation is in the form of an `OpenAPI v. 3 swagger.json` file.  The UI for the `OpenAPI` interface is located at [`http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config`](http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config)
@@ -42,4 +54,4 @@ The core domain has the interfaces that are central to the operation of the syst
 
 ##### Output
 As mentioned above the two outputs are a text file and an in-memory database.  The text file is a representation of what _would_ be sent to a receiving user.
-The database can be accessed while the system is running at [http://localhost:8080/h2-console](http://localhost:8080/h2-console) and use password `password` (make sure the `JDBC URL` field reads "jdbc:h2:mem:testdb" with no quotes).  Once the `h2` UI comes up, click the `Messages` element on the left and the `Run` button should return the messages stored in the database.
+
