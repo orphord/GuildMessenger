@@ -18,14 +18,6 @@ public class MessengerController {
     private final AddMessageHandler addMessageHandler;
     private final MessageRetrievalService messageRetrievalService;
 
-    @GetMapping
-    public ResponseEntity<AddMessageCommand> test() {
-        log.info("Test endpoint called");
-
-
-        return ResponseEntity.ok(new AddMessageCommand());
-    }
-
     @PostMapping(value = "addMessage", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> addMessage(@RequestBody AddMessageCommand addMessageCommand) {
         log.info("AddMessageEndpoint called." + addMessageCommand.toString());
