@@ -15,9 +15,9 @@ In developing this demo app I decided to use a "Ports and Adapters" pattern.  Th
    * In the request body put
    ```
      {
-	"message":"some message text here",
-	"senderId":"someId",
-	"receiverId":"someOtherId"
+         "message":"some message text here",
+         "senderId":"someId",
+         "receiverId":"someOtherId"
      }
    ```
    * The URL should be `localhost:8080/addMessage`
