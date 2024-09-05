@@ -5,7 +5,7 @@ import com.orford.guild.messenger.GuildMessenger.core.ports.outgoing.MessageSend
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
