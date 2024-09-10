@@ -13,8 +13,6 @@ import com.orford.guild.messenger.GuildMessenger.infrastructure.MessageRepositor
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.HashMap;
-
 @Configuration
 public class MessengerConfig {
     @Bean

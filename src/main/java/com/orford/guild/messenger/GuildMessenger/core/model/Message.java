@@ -1,16 +1,17 @@
 package com.orford.guild.messenger.GuildMessenger.core.model;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.annotations.CreationTimestamp;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Column;
-import jakarta.persistence.GenerationType;
 import java.sql.Timestamp;
 
 @Entity
@@ -33,7 +34,7 @@ public class Message {
     @Column(name="message_text")
     private String messageText;
 
-    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="create_timestamp")
     private Timestamp createTime;
 
