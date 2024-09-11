@@ -7,29 +7,29 @@ import java.util.stream.Collectors;
 
 @Data
 public class MessageListResponse {
-    List<MessageResponse> messageResponses;
+	List<MessageResponse> messageResponses;
 
-    public static MessageListResponse fromMessageList(List<Message> messageList) {
-        List<MessageResponse> messageResponses = messageList.stream()
-                .map(message -> {
-                    return fromMessage(message);
-                }).collect(Collectors.toList());
+	public static MessageListResponse fromMessageList(List<Message> messageList) {
+		List<MessageResponse> messageResponses = messageList.stream()
+				.map(message -> {
+					return fromMessage(message);
+				}).collect(Collectors.toList());
 
-        MessageListResponse messageListResponse = new MessageListResponse();
-        messageListResponse.setMessageResponses(messageResponses);
+		MessageListResponse messageListResponse = new MessageListResponse();
+		messageListResponse.setMessageResponses(messageResponses);
 
-        return messageListResponse;
-    }
+		return messageListResponse;
+	}
 
-    public static MessageResponse fromMessage(Message message) {
-        MessageResponse outMessageResponse = new MessageResponse();
-        outMessageResponse.setSenderId(message.getSenderId());
-        outMessageResponse.setReceiverId(message.getReceiverId());
-        outMessageResponse.setMessageText(message.getMessageText());
+	public static MessageResponse fromMessage(Message message) {
+		MessageResponse outMessageResponse = new MessageResponse();
+		outMessageResponse.setSenderId(message.getSenderId());
+		outMessageResponse.setReceiverId(message.getReceiverId());
+		outMessageResponse.setMessageText(message.getMessageText());
 
-        return outMessageResponse;
-    }
+		return outMessageResponse;
+	}
 
-    public void addMessageResponse(MessageResponse messageResponse) {
-    }
+	public void addMessageResponse(MessageResponse messageResponse) {
+	}
 }

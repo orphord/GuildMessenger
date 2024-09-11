@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import jakarta.annotation.PreDestroy;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,42 +21,42 @@ import java.util.Map;
 @Slf4j
 public class FileMessageSender implements MessageSender {
 
-    private final Map<String, BufferedWriter> fileWriterMap;
+	private final Map<String, BufferedWriter> fileWriterMap;
 
-    public FileMessageSender() {
-        fileWriterMap = new HashMap<>();
-    }
+	public FileMessageSender() {
+		fileWriterMap = new HashMap<>();
+	}
 
-    @PreDestroy
-    private void cleanup() {
-        log.info("CLEANUP called.");
-        for(String id : fileWriterMap.keySet()) {
-            try {
-                fileWriterMap.get(id).close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+	@PreDestroy
+	private void cleanup() {
+		log.info("CLEANUP called.");
+		for (String id : fileWriterMap.keySet()) {
+			try {
+				fileWriterMap.get(id).close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
-    @Override
-    public boolean sendMessage(Message messageToSend) {
-        try {
-            String fileName = messageToSend.getReceiverId() + "_MessageFile.txt";
-            if(!fileWriterMap.containsKey(messageToSend.getReceiverId())) {
-                fileWriterMap.put(messageToSend.getReceiverId(), new BufferedWriter(new FileWriter(fileName, true)));
-            }
-            BufferedWriter userFileWriter = fileWriterMap.get(messageToSend.getReceiverId());
-            log.info("About to write data to file: {}", fileName);
+	@Override
+	public boolean sendMessage(Message messageToSend) {
+		try {
+			String fileName = messageToSend.getReceiverId() + "_MessageFile.txt";
+			if (!fileWriterMap.containsKey(messageToSend.getReceiverId())) {
+				fileWriterMap.put(messageToSend.getReceiverId(), new BufferedWriter(new FileWriter(fileName, true)));
+			}
+			BufferedWriter userFileWriter = fileWriterMap.get(messageToSend.getReceiverId());
+			log.info("About to write data to file: {}", fileName);
 
-            userFileWriter.write(messageToSend.getSenderId());
-            userFileWriter.write("|");
-            userFileWriter.write(messageToSend.getMessageText());
-            userFileWriter.newLine();
+			userFileWriter.write(messageToSend.getSenderId());
+			userFileWriter.write("|");
+			userFileWriter.write(messageToSend.getMessageText());
+			userFileWriter.newLine();
 
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
-    }
+			return true;
+		} catch (IOException e) {
+			return false;
+		}
+	}
 }

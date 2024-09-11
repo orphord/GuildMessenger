@@ -19,20 +19,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 @Slf4j
 public class MessengerController {
-    private final AddMessageHandler addMessageHandler;
-    private final MessageRetrievalService messageRetrievalService;
+	private final AddMessageHandler addMessageHandler;
+	private final MessageRetrievalService messageRetrievalService;
 
-    @PostMapping(value = "addMessage", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addMessage(@RequestBody AddMessageCommand addMessageCommand) {
-        log.info("AddMessageEndpoint called." + addMessageCommand.toString());
-        addMessageHandler.handle(addMessageCommand);
-        return ResponseEntity.ok("Added message successfully.");
-    }
+	@PostMapping(value = "addMessage", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> addMessage(@RequestBody AddMessageCommand addMessageCommand) {
+		log.info("AddMessageEndpoint called." + addMessageCommand.toString());
+		addMessageHandler.handle(addMessageCommand);
+		return ResponseEntity.ok("Added message successfully.");
+	}
 
-    @GetMapping(value= "getMessages")
-    public ResponseEntity<MessageListResponse> getMessages(@RequestParam(required = false) String senderId) {
-        log.info("GetMessages endpoint called with senderId: " + senderId);
-        return ResponseEntity.ok(messageRetrievalService.getMessages(senderId));
+	@GetMapping(value = "getMessages")
+	public ResponseEntity<MessageListResponse> getMessages(@RequestParam(required = false) String senderId) {
+		log.info("GetMessages endpoint called with senderId: " + senderId);
+		return ResponseEntity.ok(messageRetrievalService.getMessages(senderId));
 
-    }
+	}
 }

@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface MessageRepository extends CrudRepository<Message, Long> {
-    List<Message> findMessageBySenderIdAndCreateTimeBefore(String senderId, Timestamp timeLimit);
+	List<Message> findMessageBySenderIdAndCreateTimeBefore(String senderId, Timestamp timeLimit);
 
-    List<Message> findMessageByCreateTimeBefore(Timestamp timeLimit);
+	List<Message> findMessageByCreateTimeBefore(Timestamp timeLimit);
 }

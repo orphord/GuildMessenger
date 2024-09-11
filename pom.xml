@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>22</java.version>
 		<springdoc.api.ui.version>1.8.0</springdoc.api.ui.version>
+		<mockitoversion>5.13.0</mockitoversion>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -56,6 +57,17 @@
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>${springdoc.api.ui.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-inline</artifactId>
+			<version>{mockitoversion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>{mockitoversion}</version>
+			<scope>test</scope>
 		</dependency>
   </dependencies>
 

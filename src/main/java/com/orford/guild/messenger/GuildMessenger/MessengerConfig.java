@@ -15,18 +15,24 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MessengerConfig {
-    @Bean
-    public AddMessageHandler addMessage(MessageDatabase messageDatabase, MessageSender messageSender) { return new MessengerFacade(messageDatabase, messageSender); }
+	@Bean
+	public AddMessageHandler addMessage(MessageDatabase messageDatabase, MessageSender messageSender) {
+		return new MessengerFacade(messageDatabase, messageSender);
+	}
 
-    @Bean
-    MessageDatabase messageDatabase(MessageRepository messageRepository) {
-        return new MessageDatabaseAdapter(messageRepository);
-    }
+	@Bean
+	MessageDatabase messageDatabase(MessageRepository messageRepository) {
+		return new MessageDatabaseAdapter(messageRepository);
+	}
 
-    @Bean
-    MessageRetrievalService retrievalService(MessageDatabase messageDatabase) { return new MessageRetrievalServiceImpl(messageDatabase); }
+	@Bean
+	MessageRetrievalService retrievalService(MessageDatabase messageDatabase) {
+		return new MessageRetrievalServiceImpl(messageDatabase);
+	}
 
-    @Bean
-    MessageSender messageSender() {return new FileMessageSender();}
+	@Bean
+	MessageSender messageSender() {
+		return new FileMessageSender();
+	}
 
 }

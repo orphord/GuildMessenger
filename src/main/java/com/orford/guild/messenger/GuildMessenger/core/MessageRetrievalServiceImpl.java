@@ -12,18 +12,18 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class MessageRetrievalServiceImpl implements MessageRetrievalService {
-    private final MessageDatabase messageDatabase;
+	private final MessageDatabase messageDatabase;
 
-    @Override
-    public MessageListResponse getMessages(String senderId) {
-        List<Message> messageList;
-        if(senderId == null) {
-            messageList = messageDatabase.getMessages(null);
-        } else {
-            messageList = messageDatabase.getMessagesBySenderId(senderId, null);
-        }
-        MessageListResponse outMessageList = MessageListResponse.fromMessageList(messageList);
+	@Override
+	public MessageListResponse getMessages(String senderId) {
+		List<Message> messageList;
+		if (senderId == null) {
+			messageList = messageDatabase.getMessages(null);
+		} else {
+			messageList = messageDatabase.getMessagesBySenderId(senderId, null);
+		}
+		MessageListResponse outMessageList = MessageListResponse.fromMessageList(messageList);
 
-        return outMessageList;
-    }
+		return outMessageList;
+	}
 }

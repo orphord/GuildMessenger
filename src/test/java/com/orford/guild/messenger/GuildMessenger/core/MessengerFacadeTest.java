@@ -2,23 +2,26 @@ package com.orford.guild.messenger.GuildMessenger.core;
 
 import com.orford.guild.messenger.GuildMessenger.core.model.AddMessageCommand;
 import com.orford.guild.messenger.GuildMessenger.core.model.MessageListResponse;
+import com.orford.guild.messenger.GuildMessenger.core.model.MessageResponse;
 import com.orford.guild.messenger.GuildMessenger.core.ports.incoming.AddMessageHandler;
 import com.orford.guild.messenger.GuildMessenger.core.ports.incoming.MessageRetrievalService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Slf4j
+@ExtendWith(MockitoExtension.class)
 class MessengerFacadeTest {
-
-    @Autowired
     private AddMessageHandler addMessageHandler;
 
-    @Autowired
+    @Mock
     MessageRetrievalService retrievalService;
 
     private static AddMessageCommand messageCommand;
@@ -27,9 +30,10 @@ class MessengerFacadeTest {
     @BeforeEach
     void setup() {
         log.info("Setup() called.");
+        numInserted = 0;
         messageCommand = new AddMessageCommand();
         messageCommand.setSenderId("orphord");
-        messageCommand.setReceiverId("bplantico");
+        messageCommand.setReceiverId("ncrane");
         messageCommand.setMessage("Well hello there");
         addMessageHandler.handle(messageCommand);
         numInserted++;
@@ -49,7 +53,7 @@ class MessengerFacadeTest {
 
     @Test
     void testGetAllMessages() {
-        log.info("Test get all messages.");
+        log.info("++++++++ Test get all messages +++++++++");
         MessageListResponse listResponse = retrievalService.getMessages(null);
         log.info("-- Number of messages returned: {}", listResponse.getMessageResponses().size());
 
@@ -58,14 +62,17 @@ class MessengerFacadeTest {
 
     @Test
     void testGetMessagesBySenderId () {
-        log.info("Test get messages by sender ID.");
+        log.info("========= Test get messages by sender ID: " + messageCommand.toString());
         messageCommand.setSenderId("lester");
         boolean success = addMessageHandler.handle(messageCommand);
         numInserted++;
         MessageListResponse listResponse = retrievalService.getMessages("orphord");
         log.info("++ Number of messages returned: {}", listResponse.getMessageResponses().size());
+        for(MessageResponse msg : listResponse.getMessageResponses()) {
+            log.info("******** MESSAGE: {}", msg.getMessageText());
+        }
 
-        Assertions.assertEquals(numInserted -1 , listResponse.getMessageResponses().size(), "All messages but 1 added by orphord should have been" + numInserted + " messages returned.");
+        Assertions.assertEquals(2 , listResponse.getMessageResponses().size(), "All messages but 1 added by orphord should have been " + numInserted + " messages returned.");
 
     }
 }
