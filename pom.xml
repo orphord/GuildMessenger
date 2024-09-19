@@ -16,7 +16,7 @@
 	<properties>
 		<java.version>22</java.version>
 		<springdoc.api.ui.version>1.8.0</springdoc.api.ui.version>
-		<mockitoversion>5.13.0</mockitoversion>
+		<mockitoversion>5.2.0</mockitoversion>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -69,7 +69,13 @@
 			<version>{mockitoversion}</version>
 			<scope>test</scope>
 		</dependency>
-  </dependencies>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>5.11.0</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>

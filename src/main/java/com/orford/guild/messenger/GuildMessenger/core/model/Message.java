@@ -1,13 +1,6 @@
 package com.orford.guild.messenger.GuildMessenger.core.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +30,8 @@ public class Message {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "create_timestamp")
 	private Timestamp createTime;
+
+	public Message() {}
 
 	public Long getIdAsLong() {
 		return id;
